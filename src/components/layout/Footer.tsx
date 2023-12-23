@@ -2,7 +2,7 @@ import { FeedbackFish } from '@feedback-fish/react';
 import * as React from 'react';
 import { FiMail } from 'react-icons/fi';
 import { IconType } from 'react-icons/lib';
-import {SiGithub, SiInstagram, SiThreads} from 'react-icons/si';
+import {SiGithub, SiInstagram, SiSteam, SiThreads} from 'react-icons/si';
 
 import { trackEvent } from '@/lib/analytics';
 import useCopyToClipboard from '@/hooks/useCopyToClipboard';
@@ -127,7 +127,7 @@ function SocialLinks() {
 const footerLinks: { href: string; text: string; tooltip: React.ReactNode }[] =
   [
     {
-      href: 'https://github.com/sherryuser/shaxriyor',
+      href: 'https://github.com/sherryuser/shaxriyor.live',
       text: 'Source Code',
       tooltip: (
         <>
@@ -196,4 +196,15 @@ const socials: Social[] = [
       </>
     ),
   },
+    {
+        href: 'https://steamcommunity.com/id/sherryuser/',
+        icon: SiSteam,
+        id: 'Steam',
+        text: (
+            <>
+                Explore my Counter-Strike 2 prowess on{' '}
+                <Accent className='font-medium'>Steam</Accent>!
+            </>
+        ),
+    },
 ];

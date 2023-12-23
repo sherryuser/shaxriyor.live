@@ -5,7 +5,6 @@ import { HiOutlineClock, HiOutlineEye } from 'react-icons/hi';
 
 import Accent from '@/components/Accent';
 import Tag from '@/components/content/Tag';
-import CloudinaryImg from '@/components/images/CloudinaryImg';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
 import { BlogFrontmatter, InjectedMeta } from '@/types/frontmatters';

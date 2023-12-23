@@ -23,7 +23,7 @@ export default function GuestbookPage() {
             <p className='mt-2 text-gray-700 dark:text-gray-200'>
               Leave whatever you like to say—message, appreciation, suggestions.
               If you got some questions, you can leave them on the{' '}
-              <CustomLink href='https://github.com/sherryuser/personal/discussions/1'>
+              <CustomLink href='https://github.com/sherryuser/shaxriyor.live/discussions/1'>
                 AMA discussion
               </CustomLink>
             </p>

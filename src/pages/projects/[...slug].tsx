@@ -16,12 +16,12 @@ import MDXComponents from '@/components/content/MDXComponents';
 import TableOfContents, {
   HeadingScrollSpy,
 } from '@/components/content/TableOfContents';
-import CloudinaryImg from '@/components/images/CloudinaryImg';
 import Layout from '@/components/layout/Layout';
 import CustomLink from '@/components/links/CustomLink';
 import Seo from '@/components/Seo';
 
 import { ProjectType } from '@/types/frontmatters';
+import NextImage from "@/components/images/NextImage";
 
 export default function SingleProjectPage({ code, frontmatter }: ProjectType) {
   const Component = React.useMemo(() => getMDXComponent(code), [code]);
@@ -65,11 +65,12 @@ export default function SingleProjectPage({ code, frontmatter }: ProjectType) {
       <main>
         <section className=''>
           <div className='layout'>
-            <CloudinaryImg
-              publicId={`theodorusclarence/${frontmatter.banner}`}
-              alt={frontmatter.title}
-              width={1440}
-              height={792}
+            <NextImage
+                useSkeleton
+                src={`/images/banner/${frontmatter.banner}`}
+                alt={`Photo from unsplash: ${frontmatter.banner}`}
+                width={1200}
+                height={(1200 * 2) / 4}
             />
 
             <h1 className='mt-4'>{frontmatter.title}</h1>

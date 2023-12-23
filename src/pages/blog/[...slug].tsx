@@ -56,8 +56,8 @@ export default function SingleBlogPage({
   );
 
   //#region  //*=========== Link Constants ===========
-  const COMMIT_HISTORY_LINK = `https://github.com/sherryuser/shaxriyor/commits/main/src/contents/blog/${frontmatter.slug}.mdx`;
-  const GITHUB_EDIT_LINK = `https://github.com/sherryuser/shaxriyor/blob/main/src/contents/blog/${frontmatter.slug}.mdx`;
+  const COMMIT_HISTORY_LINK = `https://github.com/sherryuser/shaxriyor.live/commits/main/src/contents/blog/${frontmatter.slug}.mdx`;
+  const GITHUB_EDIT_LINK = `https://github.com/sherryuser/shaxriyor.live/blob/main/src/contents/blog/${frontmatter.slug}.mdx`;
   //#endregion  //*======== Link Constants ===========
 
   //#region  //*=========== Blog Language ===========

@@ -14,7 +14,6 @@ import useLoaded from '@/hooks/useLoaded';
 
 import Accent from '@/components/Accent';
 import BlogCard from '@/components/content/blog/BlogCard';
-import ShortsCard from '@/components/content/card/ShortsCard';
 import ProjectCard from '@/components/content/projects/ProjectCard';
 import Layout from '@/components/layout/Layout';
 import ButtonLink from '@/components/links/ButtonLink';
@@ -32,7 +31,6 @@ export default function IndexPage({
   const populatedPosts = useInjectContentMeta('blog', featuredPosts);
   const populatedIntro = useInjectContentMeta('blog', introPosts);
   const populatedProjects = useInjectContentMeta('projects', featuredProjects);
-  const populatedShorts = useInjectContentMeta('library', featuredShorts);
 
   const isLoaded = useLoaded();
 
@@ -95,7 +93,7 @@ export default function IndexPage({
               className='mt-4 flex flex-wrap gap-4 gap-y-2 md:mt-8'
             >
               <UnstyledLink
-                href='https://clarence.link/cv'
+                href='https://linkedin.com/in/sherryuser'
                 className={clsx(
                   'inline-flex items-center gap-1 text-sm font-medium md:text-base',
                   'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white',
@@ -290,43 +288,6 @@ export default function IndexPage({
             </section>
           )}
         </InView>
-
-        <InView triggerOnce rootMargin='-40% 0px'>
-          {({ ref, inView }) => (
-            <section
-              ref={ref}
-              className={clsx('py-20', inView && 'fade-in-start')}
-            >
-              <article className='layout' data-fade='0'>
-                <h2 className='text-2xl md:text-4xl' id='library'>
-                  <Accent>Shorts</Accent>
-                </h2>
-                <p className='mt-2 text-gray-600 dark:text-gray-300'>
-                  Short article that's not long enough to be a blog post,
-                  usually comes from my personal notes.
-                </p>
-                <ul className='mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
-                  {populatedShorts.map((short, i) => (
-                    <ShortsCard
-                      key={short.slug}
-                      short={short}
-                      className={clsx(i > 2 && 'hidden sm:block')}
-                    />
-                  ))}
-                </ul>
-                <ButtonLink
-                  className='mt-4'
-                  href='/shorts'
-                  onClick={() =>
-                    trackEvent('Home: See more shorts', { type: 'navigate' })
-                  }
-                >
-                  See more shorts
-                </ButtonLink>
-              </article>
-            </section>
-          )}
-        </InView>
       </main>
     </Layout>
   );
@@ -342,11 +303,11 @@ export async function getStaticProps() {
   const featuredPosts = getFeatured(blogs, [
     'time-management-for-developers',
     'top-productivity-tools-for-developers',
+    'sh3rry',
   ]);
   const featuredProjects = getFeatured(projects, [
-    'hexcape',
-    'notiolink',
-    'ppdbsumsel',
+    'telegram-anon-qa-bot',
+    'interactive-birthday-cake',
   ]);
   const featuredShorts = getFeatured(shorts, [
     'react/absolute-import',

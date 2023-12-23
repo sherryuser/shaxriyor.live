@@ -24,6 +24,8 @@ import {
   SiCss3,
   SiPhp,
   SiThreads,
+  SiSteam,
+  SiPython, SiSqlite,
 } from 'react-icons/si';
 
 import Tooltip from '@/components/Tooltip';
@@ -133,18 +135,30 @@ const techList = {
   },
   html5: {
     icon: SiHtml5,
-    name: 'html5',
+    name: 'HTML5',
   },
   css3: {
     icon: SiCss3,
-    name: 'css3',
+    name: 'CSS3',
   },
   php: {
     icon: SiPhp,
-    name: 'php',
+    name: 'PHP',
   },
   threads: {
     icon: SiThreads,
-    name: 'threads',
+    name: 'Threads',
+  },
+  steam: {
+    icon: SiSteam,
+    name: 'Steam',
+  },
+  python: {
+    icon: SiPython,
+    name: 'Python',
+  },
+  sqlite: {
+    icon: SiSqlite,
+    name: 'SqLite',
   },
 };

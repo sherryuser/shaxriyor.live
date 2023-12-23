@@ -171,7 +171,7 @@ export default function AboutPage() {
             <h2>Uses</h2>
             <article className='prose mt-4 dark:prose-invert'>
               <ul>
-                <li>MacBook Pro (13" M1 2020, 8GB, 256GB) 💻</li>
+                <li>MacBook Air (13" M1 2020, 8GB, 256GB) 💻</li>
                 <li>iPhone 12 Mini 📱</li>
                 <li>iPad 5th Gen 📲</li>
                 <li>AirPods 2th Gen 🎧</li>
