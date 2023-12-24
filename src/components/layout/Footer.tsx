@@ -92,7 +92,7 @@ function SocialLinks() {
         >
           <button
             onClick={() => {
-              copy('me@theodorusclarence.com').then(() => {
+              copy('sherryuser1@gmail.com').then(() => {
                 setCopyStatus('copied');
                 setTimeout(() => setCopyStatus('idle'), 1500);
               });
