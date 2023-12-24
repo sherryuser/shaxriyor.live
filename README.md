@@ -36,7 +36,7 @@ You can now open up `http://localhost:3000` and start writing code!
 
 ## Feature Flag 🚩
 
-Major features are feature flagged in [constants/env.ts](https://github.com/theodorusclarence/theodorusclarence.com/blob/main/src/constants/env.ts)
+Major features are feature flagged in [constants/env.ts](https://github.com/sherryuser/shaxriyor.live/blob/main/src/constants/env.ts)
 
 For example:
 

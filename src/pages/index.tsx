@@ -25,7 +25,6 @@ import TC from '@/components/TC';
 export default function IndexPage({
   featuredPosts,
   featuredProjects,
-  featuredShorts,
   introPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const populatedPosts = useInjectContentMeta('blog', featuredPosts);
@@ -298,7 +297,6 @@ export async function getStaticProps() {
 
   const blogs = await getAllFilesFrontmatter('blog');
   const projects = await getAllFilesFrontmatter('projects');
-  const shorts = await getAllFilesFrontmatter('library');
 
   const featuredPosts = getFeatured(blogs, [
     'time-management-for-developers',
@@ -308,14 +306,6 @@ export async function getStaticProps() {
   const featuredProjects = getFeatured(projects, [
     'telegram-anon-qa-bot',
     'interactive-birthday-cake',
-  ]);
-  const featuredShorts = getFeatured(shorts, [
-    'react/absolute-import',
-    'auth-context',
-    'mac/zsh',
-    'react/jsx-one-parent',
-    'styling/margin-usage',
-    'uncategorized/search-removal',
   ]);
 
   const introPosts = getFeatured(blogs, [
@@ -327,7 +317,6 @@ export async function getStaticProps() {
     props: {
       featuredPosts,
       featuredProjects,
-      featuredShorts,
       introPosts,
     },
   };

@@ -22,7 +22,7 @@ export default function CarbonAds({ className }: { className?: string }) {
 
     const script = document.createElement('script');
     script.src =
-      'https://cdn.carbonads.com/carbon.js?serve=CWYDE23M&placement=theodorusclarencecom';
+      '#';
     script.id = '_carbonads_js';
     script.async = true;
 
@@ -47,7 +47,7 @@ export default function CarbonAds({ className }: { className?: string }) {
           <UnstyledLink
             className='underline hover:text-primary-500 dark:hover:text-primary-400'
             onClick={() => trackEvent('Sponsor Click', { type: 'link' })}
-            href='https://github.com/sponsors/theodorusclarence'
+            href='#'
           >
             sponsor
           </UnstyledLink>{' '}
