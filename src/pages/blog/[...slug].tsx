@@ -35,6 +35,7 @@ import ShareTweetButton from '@/components/links/ShareTweetButton';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
 import Tooltip from '@/components/Tooltip';
+import Image from "next/image";
 
 import { BlogFrontmatter, BlogType } from '@/types/frontmatters';
 import NextImage from "@/components/images/NextImage";
@@ -111,8 +112,7 @@ export default function SingleBlogPage({
         <section className=''>
           <div className='layout'>
             <div className='pb-4 dark:border-gray-600'>
-              <NextImage
-                useSkeleton
+              <img
                 src={`/images/banner/${frontmatter.banner}.png`}
                 alt={`Photo from unsplash: ${frontmatter.banner}`}
                 width={1200}

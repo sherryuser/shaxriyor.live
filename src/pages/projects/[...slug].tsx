@@ -65,8 +65,7 @@ export default function SingleProjectPage({ code, frontmatter }: ProjectType) {
       <main>
         <section className=''>
           <div className='layout'>
-            <NextImage
-                useSkeleton
+            <img
                 src={`/images/banner/${frontmatter.banner}`}
                 alt={`Photo from unsplash: ${frontmatter.banner}`}
                 width={1200}
