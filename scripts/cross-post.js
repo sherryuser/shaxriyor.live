@@ -15,32 +15,32 @@ const select = '(.*)';
  * @argument $2 alt e.g. seo-component
  */
 const CLOUDINARY_REGEXP = new RegExp(
-  `<Img${dotAll}publicId=${quote}${select}${quote}${dotAll}alt=${quote}${select}${quote}${dotAll}/>`,
-  'g'
+    `<Img${dotAll}publicId=${quote}${select}${quote}${dotAll}alt=${quote}${select}${quote}${dotAll}/>`,
+    'g'
 );
 
 /**
  * @argument $1 user/reponame e.g. theodorusclarence/ts-nextjs-tailwind-starter
  */
 const GITHUB_REGEXP = new RegExp(
-  `<GithubCard${dotAll}repo=${quote}${select}${quote}${dotAll}/>`,
-  'g'
+    `<GithubCard${dotAll}repo=${quote}${select}${quote}${dotAll}/>`,
+    'g'
 );
 
 /**
  * @argument $1 id e.g. xawHHhqIVVo
  */
 const YOUTUBE_REGEXP = new RegExp(
-  `<LiteYouTubeEmbed${dotAll}id=${quote}${select}${quote}${dotAll}/>`,
-  'g'
+    `<LiteYouTubeEmbed${dotAll}id=${quote}${select}${quote}${dotAll}/>`,
+    'g'
 );
 
 /**
  * @argument $1 id e.g. 1475685363003768836
  */
 const TWEET_REGEXP = new RegExp(
-  `<TweetCard${dotAll}tweetIdd=${quote}${select}${quote}${dotAll}/>`,
-  'g'
+    `<TweetCard${dotAll}tweetIdd=${quote}${select}${quote}${dotAll}/>`,
+    'g'
 );
 //#endregion  //*======== Regex Constants ===========
 
@@ -86,12 +86,12 @@ const devto = () => {
 
     parsedContent = content;
     parsedContent = parsedContent.replace(
-      CLOUDINARY_REGEXP,
-      '![$2](https://shaxriyor.live/images/upload/q_auto,f_auto/$1)'
+        CLOUDINARY_REGEXP,
+        '![$2](https://shaxriyor.live/images/upload/q_auto,f_auto/$1)'
     );
     parsedContent = parsedContent.replace(
-      GITHUB_REGEXP,
-      '{% github $1 no-readme %}'
+        GITHUB_REGEXP,
+        '{% github $1 no-readme %}'
     );
     parsedContent = parsedContent.replace(YOUTUBE_REGEXP, '{% youtube $1 %}');
     parsedContent = parsedContent.replace(TWEET_REGEXP, '{% twitter $1 %}');
@@ -121,20 +121,20 @@ const hashnode = () => {
     parsedContent = content;
 
     parsedContent = parsedContent.replace(
-      CLOUDINARY_REGEXP,
-      '![$2](https://shaxriyor.live/images/upload/q_auto,f_auto/$1)'
+        CLOUDINARY_REGEXP,
+        '![$2](https://shaxriyor.live/images/upload/q_auto,f_auto/$1)'
     );
     parsedContent = parsedContent.replace(
-      GITHUB_REGEXP,
-      '%[https://github.com/$1]'
+        GITHUB_REGEXP,
+        '%[https://github.com/$1]'
     );
     parsedContent = parsedContent.replace(
-      YOUTUBE_REGEXP,
-      '%[https://www.youtube.com/watch?v=$1]'
+        YOUTUBE_REGEXP,
+        '%[https://www.youtube.com/watch?v=$1]'
     );
     parsedContent = parsedContent.replace(
-      TWEET_REGEXP,
-      '%[https://twitter.com/1475685363003768836]'
+        TWEET_REGEXP,
+        '%[https://twitter.com/1475685363003768836]'
     );
     // Change tsx to ts
     parsedContent = parsedContent.replace(/```tsx/g, '```ts');
@@ -162,25 +162,26 @@ const getOgImage = () => {
     if (err) reject(err);
 
     const { data: frontmatter } = matter(content);
-    const bannerLink = `https://shaxriyor.live/images/banner/${frontmatter.banner}.png`;
-    const ogLink = `https://og.shaxriyor.live/api/blog?templateTitle=${encodeURIComponent(
-      frontmatter.title
-    )}&banner=${encodeURIComponent(bannerLink)}`;
+    const ogLink = `https://og.shaxriyor.live/api/gradient?templateTitle=${encodeURIComponent(
+        frontmatter.title
+    )}&description=${encodeURIComponent(
+        frontmatter.description
+    )}&siteName=${encodeURIComponent("shaxriyor.live")}`;
     const image_path = join(outPath, 'og_image.png');
     axios({
       url: ogLink,
       responseType: 'stream',
     }).then(
-      (response) =>
-        new Promise((resolve, reject) => {
-          response.data
-            .pipe(createWriteStream(image_path))
-            .on('finish', () => {
-              console.log('✓ OG Image is successfully downloaded');
-              resolve();
+        (response) =>
+            new Promise((resolve, reject) => {
+              response.data
+                  .pipe(createWriteStream(image_path))
+                  .on('finish', () => {
+                    console.log('✓ OG Image is successfully downloaded');
+                    resolve();
+                  })
+                  .on('error', (e) => reject(e));
             })
-            .on('error', (e) => reject(e));
-        })
     );
   });
 };
