@@ -55,9 +55,9 @@ Like this post? [Subscribe to my newsletter](https://theodorusclarence.com/subsc
 const hashnodeFooter = `
 ---
 
-> Originally posted on [my personal site](https://theodorusclarence.com/?ref=hashnode), find more [blog posts](https://theodorusclarence.com/blog?ref=hashnode) and [code snippets library](https://theodorusclarence.com/library?ref=hashnode) I put up for easy access on my site 🚀
+> Originally posted on [my personal site](https://shaxriyor.live/?ref=hashnode), find more [blog posts](https://shaxriyor.live/blog?ref=hashnode) I put up for easy access on my site 🚀
 
-Like this post? [Subscribe to my newsletter](https://theodorusclarence.com/subscribe?ref=hashnode) to get notified every time a new post is out!`;
+Like this post? [Subscribe to my newsletter](https://shaxriyor.live/subscribe?ref=hashnode) to get notified every time a new post is out!`;
 //#endregion  //*======== Footers ===========
 
 const slug = process.argv[2];
@@ -162,8 +162,8 @@ const getOgImage = () => {
     if (err) reject(err);
 
     const { data: frontmatter } = matter(content);
-    const bannerLink = `https://res.cloudinary.com/theodorusclarence/image/upload/f_auto,c_fill,ar_4:5,w_1200/theodorusclarence/banner/${frontmatter.banner}`;
-    const ogLink = `https://og.clarence.link/api/blog?templateTitle=${encodeURIComponent(
+    const bannerLink = `/images/banner/${frontmatter.banner}?f_auto,c_fill,ar_4:5,w_1200`;
+    const ogLink = `https://og.shaxriyor.live/api/blog?templateTitle=${encodeURIComponent(
       frontmatter.title
     )}&banner=${encodeURIComponent(bannerLink)}`;
     const image_path = join(outPath, 'og_image.png');

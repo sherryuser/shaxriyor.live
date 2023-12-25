@@ -30,7 +30,7 @@ export async function getRssXml() {
       <channel>
         <title>Shakhriyor Ergashev Blog</title>
         <link>${blogUrl}</link>
-        <description>The Theodorus Clarence Blog, thoughts, mental models, and tutorials about front-end development.</description>
+        <description>Shakhriyor Ergashev thoughts, blog, project and much more.</description>
         <language>en</language>
         <ttl>40</ttl>
         ${itemXml.join('\n')}

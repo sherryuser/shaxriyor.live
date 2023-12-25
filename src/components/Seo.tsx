@@ -9,7 +9,7 @@ const defaultMeta = {
   description:
     'Explore the digital realm with Shakhriyor Ergashev\'s online portfolio and blog. Dive into a showcase of my diverse projects and discover insights on website development.',
   url: 'https://shaxriyor.live',
-  image: 'https://theodorusclarence.com/favicon/large-og.jpg',
+  image: 'https://shaxriyor.live/favicon/large-og.jpg',
   type: 'website',
   robots: 'follow, index',
 };
