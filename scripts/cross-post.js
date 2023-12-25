@@ -162,7 +162,7 @@ const getOgImage = () => {
     if (err) reject(err);
 
     const { data: frontmatter } = matter(content);
-    const bannerLink = `/images/banner/${frontmatter.banner}?f_auto,c_fill,ar_4:5,w_1200`;
+    const bannerLink = `https://shaxriyor.live/images/banner/f_auto,c_fill,ar_4:5,w_1200/${frontmatter.banner}`;
     const ogLink = `https://og.shaxriyor.live/api/blog?templateTitle=${encodeURIComponent(
       frontmatter.title
     )}&banner=${encodeURIComponent(bannerLink)}`;
