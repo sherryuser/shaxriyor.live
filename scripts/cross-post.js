@@ -122,7 +122,7 @@ const hashnode = () => {
 
     parsedContent = parsedContent.replace(
       CLOUDINARY_REGEXP,
-      '![$2](https://res.cloudinary.com/theodorusclarence/image/upload/q_auto,f_auto/$1)'
+      '![$2](https://shaxriyor.live/images/upload/q_auto,f_auto/$1)'
     );
     parsedContent = parsedContent.replace(
       GITHUB_REGEXP,
@@ -162,7 +162,7 @@ const getOgImage = () => {
     if (err) reject(err);
 
     const { data: frontmatter } = matter(content);
-    const bannerLink = `https://shaxriyor.live/images/banner/f_auto,c_fill,ar_4:5,w_1200/${frontmatter.banner}`;
+    const bannerLink = `https://shaxriyor.live/images/upload/f_auto,c_fill,ar_4:5,w_1200/images/banner/${frontmatter.banner}`;
     const ogLink = `https://og.shaxriyor.live/api/blog?templateTitle=${encodeURIComponent(
       frontmatter.title
     )}&banner=${encodeURIComponent(bannerLink)}`;
