@@ -23,7 +23,7 @@ CSGO-qFRTB-FU2jC-5VxHE-dFSvZ-9mUCP
 ```md
 CSGO-OCskf-qjunY-FE6T6-rsTR9-7SVvD
 ```
-# Jumpthrow
+# JumpThrow
 
 ```md
 alias "+boing" "+jump"
@@ -38,6 +38,18 @@ alias "+dong" "-jump"
 bind "z" "+boing; +ding; +dong"
 ```
 
+# Run JumpThrow
+
+```md
+alias "+runthrow" "+forward;+jump;"
+```
+```md
+alias "-runthrow" "-jump;-forward"
+```
+```md
+bind MOUSE4 "+runthrow;+throwaction"
+```
+
 # View Radar
 
 ```md
@@ -48,12 +60,6 @@ bind "c" "incrementvar cl_radar_scale 0.45 0.8 0.35"
 
 ```md
 bind SPACE "slot3; slot5; drop"
-```
-
-# Hand Change
-
-```md
-bind v "toggle cl_righthand 0 1"
 ```
 
 # Viewmodel
