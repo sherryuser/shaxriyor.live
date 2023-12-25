@@ -15,7 +15,7 @@ const select = '(.*)';
  * @argument $2 alt e.g. seo-component
  */
 const CLOUDINARY_REGEXP = new RegExp(
-  `<CloudinaryImg${dotAll}publicId=${quote}${select}${quote}${dotAll}alt=${quote}${select}${quote}${dotAll}/>`,
+  `<Img${dotAll}publicId=${quote}${select}${quote}${dotAll}alt=${quote}${select}${quote}${dotAll}/>`,
   'g'
 );
 
@@ -87,7 +87,7 @@ const devto = () => {
     parsedContent = content;
     parsedContent = parsedContent.replace(
       CLOUDINARY_REGEXP,
-      '![$2](https://res.cloudinary.com/theodorusclarence/image/upload/q_auto,f_auto/$1)'
+      '![$2](https://shaxriyor.live/images/upload/q_auto,f_auto/$1)'
     );
     parsedContent = parsedContent.replace(
       GITHUB_REGEXP,
