@@ -48,9 +48,9 @@ const TWEET_REGEXP = new RegExp(
 const devtoFooter = `
 ---
 
-> Originally posted on [my personal site](https://theodorusclarence.com/?ref=devto), find more [blog posts](https://theodorusclarence.com/blog?ref=devto) and [code snippets library](https://theodorusclarence.com/library?ref=devto) I put up for easy access on my site 🚀
+> Originally posted on [my personal site](https://shaxriyor.live/?ref=devto), find more [blog posts](https://shaxriyor.live/blog?ref=devto) I put up for easy access on my site 🚀
 
-Like this post? [Subscribe to my newsletter](https://theodorusclarence.com/subscribe?ref=devto) to get notified every time a new post is out!`;
+Like this post? [Subscribe to my newsletter](https://shaxriyor.live/subscribe?ref=devto) to get notified every time a new post is out!`;
 
 const hashnodeFooter = `
 ---
@@ -87,7 +87,7 @@ const devto = () => {
     parsedContent = content;
     parsedContent = parsedContent.replace(
         CLOUDINARY_REGEXP,
-        '![$2](https://shaxriyor.live/images/upload/q_auto,f_auto/$1)'
+        '![$2](https://shaxriyor.live/images/upload/$1)'
     );
     parsedContent = parsedContent.replace(
         GITHUB_REGEXP,
@@ -122,7 +122,7 @@ const hashnode = () => {
 
     parsedContent = parsedContent.replace(
         CLOUDINARY_REGEXP,
-        '![$2](https://shaxriyor.live/images/upload/q_auto,f_auto/$1)'
+        '![$2](https://shaxriyor.live/images/upload/$1)'
     );
     parsedContent = parsedContent.replace(
         GITHUB_REGEXP,
