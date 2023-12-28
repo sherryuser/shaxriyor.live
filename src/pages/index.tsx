@@ -304,8 +304,9 @@ export async function getStaticProps() {
     'sh3rry',
   ]);
   const featuredProjects = getFeatured(projects, [
-    'telegram-anon-qa-bot',
+    'swwap',
     'interactive-birthday-cake',
+    'telegram-anon-qa-bot',
   ]);
 
   const introPosts = getFeatured(blogs, [

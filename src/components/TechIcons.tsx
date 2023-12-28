@@ -25,7 +25,7 @@ import {
   SiPhp,
   SiThreads,
   SiSteam,
-  SiPython, SiSqlite,
+  SiPython, SiSqlite, SiMysql,
 } from 'react-icons/si';
 
 import Tooltip from '@/components/Tooltip';
@@ -160,5 +160,9 @@ const techList = {
   sqlite: {
     icon: SiSqlite,
     name: 'SqLite',
+  },
+  mysql: {
+    icon: SiMysql,
+    name: 'MySQL',
   },
 };
