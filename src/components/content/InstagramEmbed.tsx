@@ -42,9 +42,6 @@ const InstagramEmbed: React.FC<InstagramEmbedProps> = ({
                 <iframe
                     src={embedUrl}
                     style={iframeStyle}
-                    frameBorder="0"
-                    scrolling="no"
-                    allowTransparency={true}
                 ></iframe>
             </div>
         </Container>
