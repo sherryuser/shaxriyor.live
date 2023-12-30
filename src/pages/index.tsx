@@ -20,7 +20,6 @@ import ButtonLink from '@/components/links/ButtonLink';
 import CustomLink from '@/components/links/CustomLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
-import TC from '@/components/TC';
 
 export default function IndexPage({
   featuredPosts,
@@ -61,7 +60,11 @@ export default function IndexPage({
               )}
               data-fade='3'
             >
-              🚀 as a prolific full stack web developer, my dedication is to the craft of coding and the pursuit of excellence. with a robust track record of designing and launching over ten distinctive websites, my passion extends beyond mere creation—it's about architecting exceptional web experiences that set new benchmarks.
+              🚀 as a prolific full stack web developer, my dedication is to the
+              craft of coding and the pursuit of excellence. with a robust track
+              record of designing and launching over ten distinctive websites,
+              my passion extends beyond mere creation—it's about architecting
+              exceptional web experiences that set new benchmarks.
             </p>
             <p
               className='mt-3 max-w-4xl leading-relaxed text-gray-700 dark:text-gray-200 md:mt-4 md:text-lg 2xl:text-xl'
@@ -148,14 +151,6 @@ export default function IndexPage({
           >
             <IoArrowDownOutline className='h-8 w-8 animate-bounce md:h-10 md:w-10' />
           </UnstyledLink>
-          <TC
-            className={clsx(
-              'absolute bottom-0 right-6',
-              'translate-y-[37%] transform-gpu',
-              'w-[calc(100%-3rem)] md:w-[600px] 2xl:w-[900px]',
-              'z-[-1] opacity-70 dark:opacity-30'
-            )}
-          />
         </section>
 
         <InView triggerOnce rootMargin='-40% 0px'>
@@ -179,21 +174,33 @@ export default function IndexPage({
                     </Accent>
                   </h2>
                   <div className='mt-4 text-base text-gray-600 dark:text-gray-300 md:text-lg'>
-                    Embark on a journey to master the developer's most coveted skills beyond coding:
+                    Embark on a journey to master the developer's most coveted
+                    skills beyond coding:
                     <strong className='text-gray-700 dark:text-gray-200'>
                       time management
-                    </strong> and <strong className='text-gray-700 dark:text-gray-200'>
-                    productivity
-                  </strong>. 🚀 Two-part series first unravels the secrets of managing
-                    time effectively while juggling coding projects, studies, and life. 🕒 Then, we delve into the digital arsenal
-                    of the modern developer, evaluating the best tools that help maintain this delicate balance. 🛠️
-                    From maximizing your most productive hours to leveraging the power of <strong className='text-gray-700 dark:text-gray-200'>
-                    Trello
-                  </strong>, <strong className='text-gray-700 dark:text-gray-200'>
-                    Notion
-                  </strong>, and <strong className='text-gray-700 dark:text-gray-200'>
-                    VS Code extensions
-                  </strong>, elevate your efficiency and reclaim your valuable time. ⏳
+                    </strong>{' '}
+                    and{' '}
+                    <strong className='text-gray-700 dark:text-gray-200'>
+                      productivity
+                    </strong>
+                    . 🚀 Two-part series first unravels the secrets of managing
+                    time effectively while juggling coding projects, studies,
+                    and life. 🕒 Then, we delve into the digital arsenal of the
+                    modern developer, evaluating the best tools that help
+                    maintain this delicate balance. 🛠️ From maximizing your most
+                    productive hours to leveraging the power of{' '}
+                    <strong className='text-gray-700 dark:text-gray-200'>
+                      Trello
+                    </strong>
+                    ,{' '}
+                    <strong className='text-gray-700 dark:text-gray-200'>
+                      Notion
+                    </strong>
+                    , and{' '}
+                    <strong className='text-gray-700 dark:text-gray-200'>
+                      VS Code extensions
+                    </strong>
+                    , elevate your efficiency and reclaim your valuable time. ⏳
                   </div>
                 </div>
                 <div className='h-full w-full'>
