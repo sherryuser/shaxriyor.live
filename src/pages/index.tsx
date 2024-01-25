@@ -306,7 +306,7 @@ export async function getStaticProps() {
   const projects = await getAllFilesFrontmatter('projects');
 
   const featuredPosts = getFeatured(blogs, [
-    'time-management-for-developers',
+    'must-have-ai-assistants-your-ultimate-ai-guide',
     'top-productivity-tools-for-developers',
     'sh3rry',
   ]);
