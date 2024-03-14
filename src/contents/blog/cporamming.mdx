@@ -1,0 +1,230 @@
+---
+title: 'CProgramming'
+publishedAt: '2024-03-14'
+description: 'Concurrent Programming module possible questions with answers'
+englishOnly: 'true'
+banner: 'cprogramming'
+tags: 'Programming'
+---
+
+> atria.saunter.08@icloud.com
+
+# Possible Questions
+
+### Lecture 2: Multithreading
+
+**Q1:** Explain the advantage of using multithreading in C# applications.
+
+- **A:** Multithreading allows C# applications to perform multiple operations simultaneously, enhancing efficiency and responsiveness, particularly in I/O-bound and CPU-intensive operations.
+
+**Q2:** Describe how a thread is created and started in C#.
+
+- **A:** A thread in C# is created by instantiating a `Thread` object with a `ThreadStart` delegate, pointing to the method the thread will execute, and started with the `Start()` method.
+
+```csharp
+Thread myThread = new Thread(new ThreadStart(MyMethod));
+myThread.Start();
+```
+
+### Lecture 3: Race Conditions
+
+**Q3:** What causes a race condition and how can it be avoided?
+
+- **A:** Race conditions occur when multiple threads access and modify shared data concurrently without proper synchronization, leading to inconsistent results. They can be avoided using locking mechanisms like `lock` in C# to ensure that only one thread can access the shared data at a time.
+
+**Q4:** Provide a simple code example that might lead to a race condition.
+
+```csharp
+public class Account
+{
+    private int balance = 100;
+
+    public void Withdraw(int amount)
+    {
+        if(balance >= amount)
+        {
+            Console.WriteLine("Amount withdrawn: " + amount);
+            balance -= amount;
+        }
+    }
+}
+```
+
+- **Explanation:** If two threads call `Withdraw()` simultaneously, they might both check the balance and decide it's sufficient, leading to a race condition where they both attempt to withdraw, potentially reducing the balance below zero.
+
+### Lecture 4: Shared Memory Model & Locks
+
+**Q5:** What is the shared memory model in concurrent programming?
+
+- **A:** The shared memory model allows multiple threads to access and modify the same data in memory, facilitating communication and data exchange between threads.
+
+**Q6:** Explain how locks can be used to prevent race conditions with an example.
+
+```csharp
+lock (lockObject)
+{
+    // Code that modifies shared resources.
+}
+```
+
+- **Explanation:** The `lock` keyword in C# ensures that only one thread can enter the block of code enclosed by the lock statement, preventing simultaneous access to shared resources.
+
+### Lecture 5: Synchronization: Mutex
+
+**Q7:** What is a mutex and how does it differ from a lock?
+
+- **A:** A mutex is a synchronization primitive that provides thread-exclusive access to shared resources across processes, unlike a lock which is limited to synchronizing access within the same process.
+
+**Q8:** When would you use a mutex instead of a lock?
+
+- **A:** A mutex is used when there's a need to synchronize access to shared resources across multiple processes, whereas a lock is sufficient for controlling access within the same process.
+
+### Lecture 6: Synchronization: Semaphores
+
+**Q9:** Define semaphore and give an example of its use.
+
+- **A:** A semaphore is a synchronization object that controls access by multiple threads to a common resource through a counter. It's useful in scenarios like limiting the number of threads accessing a database simultaneously to avoid overloading the server.
+
+**Q10:** How does a semaphore work?
+
+- **A:** A semaphore maintains a count representing the number of permits available. Threads acquire a permit with the `Wait()` method before accessing a resource and release the permit with `Release()` after use. If no permits are available, a thread will block until a permit is released by another thread.
+
+### Lecture 7 & 8: SOA and WCF
+
+**Q11:** What is Service-Oriented Architecture (SOA) and its main benefits?
+
+- **A:** SOA is an architectural pattern that structures applications as a collection of loosely coupled services, promoting reusability, scalability, and maintainability.
+
+**Q12:** Describe Windows Communication Foundation (WCF) and its relevance to SOA.
+
+- **A:** WCF is a framework for building service-oriented applications, providing a unified programming model for building services that support secure, reliable communication and are interoperable across various platforms and technologies, embodying the principles of SOA.
+
+# Mock answers
+
+### Question 1: Significance of `Thread.Join` and `Thread.IsAlive`
+
+- **Thread.Join:** Imagine you and a friend have to finish a task together. You decide to wait until your friend finishes their part before you both move on. That's what `Thread.Join` does; it makes one thread wait for another to finish up before continuing.
+- **Thread.IsAlive:** This is like checking if your friend is still working on their task. If they are, you know you have to wait. If not, you can proceed with whatever is next on the agenda.
+
+### Question 2: What is LiveLock?
+
+- Think of a narrow sidewalk where two polite people keep stepping aside to let the other pass, but they end up mirroring each other's steps and blocking the way. They're active, trying to solve the problem, but their actions prevent them from making progress, just like threads in a livelock.
+
+### Question 3: Producer-Consumer Problem
+
+The Producer-Consumer problem is a classic example of a concurrency issue where a producer generates data and places it into a buffer, and a consumer removes the data from the buffer to process it. Here's how we can understand it:
+
+- **Unbounded Buffer Problem:** Imagine a factory production line where items are continuously produced regardless of the capacity. There's no waiting or pausing; items just keep coming down the line.
+
+- **Bounded Buffer Problem:** Now, think of the production line having a limited storage area at the end. If this area gets full, the producers have to pause until some items are removed, or consumed, before they can produce more.
+
+**Pseudocode for Bounded Buffer Problem:**
+
+```plaintext
+Initialize buffer with fixed size
+Initialize count of items to 0
+
+Producer:
+While true do:
+  Produce an item
+  If count == size of buffer:
+    Wait until an item is consumed
+  Place item into buffer
+  Increment count of items
+  Signal consumer that an item is available
+End
+
+Consumer:
+While true do:
+  If count == 0:
+    Wait until an item is produced
+  Take an item from buffer
+  Decrement count of items
+  Signal producer that space is available
+  Consume the item
+End
+```
+
+**Real-World Example:** Think of the buffer as a sushi conveyor belt. The chef (producer) adds sushi plates (items) to the belt, but there's only so much space. If the belt is full, the chef waits until customers (consumers) take some plates off before adding more. Customers check the belt; if there's no sushi, they wait until the chef adds more, but if there's sushi available, they pick a plate to eat.
+
+### Question 4: Five Thread Properties in C# and Their Uses
+
+- **IsBackground:** This tells whether a thread runs in the background. Think of background music playing - it continues until your main task (or the program) is running.
+- **CurrentThread:** It's like looking in the mirror and seeing yourself. This property helps a thread see who it is among many threads.
+- **IsAlive:** Checks if the thread is still doing its job or if it has finished, similar to checking if your music player is still on.
+- **Priority:** Imagine a to-do list where some tasks are marked as high priority and others as low. This property helps decide which thread gets attended to first based on urgency.
+- **ThreadState:** It's like checking your task's status, whether it's started, finished, or waiting for something.
+
+### Question 5: Avoiding Race Conditions
+
+- Think of race conditions like two chefs trying to cook in a kitchen but only one can use the stove at a time. To avoid bumping into each other (race conditions), they agree on a sign (like a semaphore or lock) that indicates when the stove is free to use. This way, they take turns cooking without interfering with each other's dishes.
+
+### Question 6: Multithreading Application in Windows Forms
+
+```csharp
+namespace Tester
+{
+    public partial class Form1 : Form
+    {
+        private int _threadCount = 0;
+        private int _maxThreads = 10;
+        private static Semaphore? _pool;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void StartThread()
+        {
+            _pool = new Semaphore(initialCount: 0, maximumCount: 5);
+
+            for (int i = _maxThreads; i > 0; i--) {
+                Thread thread = new Thread(ThreadMethod);
+                thread.Start();
+            }
+
+            _pool.Release(5);
+
+            Console.WriteLine("And here ends the Parent class.");
+        }
+
+        private void ThreadMethod()
+        {
+            _pool?.WaitOne();
+            int threadNumber = Interlocked.Increment(ref _threadCount);
+
+            // Thread-safe way to update the TextBox
+            UpdateTextBox($"Creating Thread-{threadNumber}\r\n");
+            UpdateTextBox($"Starting Thread-{threadNumber}\r\n");
+
+            // Simulate some work
+            for (int i = 10; i > 0; i--)
+            {
+                Thread.Sleep(1000); // Sleep for demonstration purposes
+                UpdateTextBox($"Thread: Thread-{threadNumber}, {i}\r\n");
+            }
+
+            UpdateTextBox($"Thread Thread-{threadNumber} exiting.\r\n");
+            _pool?.Release();
+        }
+
+        private void UpdateTextBox(string text)
+        {
+            if (textBox1.InvokeRequired)
+            {
+                textBox1.BeginInvoke(new Action<string>(UpdateTextBox), text);
+            }
+            else
+            {
+                textBox1.AppendText(text);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StartThread();
+        }
+    }
+}
+```
