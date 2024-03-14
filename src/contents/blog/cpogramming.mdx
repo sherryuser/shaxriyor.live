@@ -228,3 +228,405 @@ namespace Tester
     }
 }
 ```
+
+# Lecture Materials
+
+### Lecture 2: Multithreading
+
+> C# Multithreading
+
+- Multithreading in C# is a process in which multiple threads work
+  simultaneously.
+- It is a process to achieve multitasking.
+- It saves time because multiple tasks are being executed at a time.
+- To create multithreaded application in C#, we need to use System.Threding namespace.
+
+> System.Threading Namespace
+
+The System.Threading namespace contains classes and interfaces to provide
+the facility of multithreaded programming. It also provides classes to
+synchronize the thread resource. A list of commonly used classes are given
+below:
+
+- Thread
+- Mutex
+- Timer
+- Monitor
+- Semaphore
+- ThreadLocal
+- ThreadPool
+- Volatile etc.
+
+> Process and Thread
+
+- A process represents an application whereas a thread represents a module of the application.
+- Process is heavyweight component whereas thread is lightweight.
+- A thread can be termed as lightweight subprocess because it is executed inside a process.
+- Whenever you create a process, a separate memory area is occupied. But threads share a common memory area.
+
+> THREADS: IN CONCEPT
+
+- Threads is execution of code to accomplish certain task.
+- Every program has one or many processes while each process has multiple threads
+- Main method in our code is basically main point of execution and itself an independent thread.
+- OS: responsible for thread and process management
+
+> Thread Class
+
+Every Win32 thread is passed a function to run when created.
+
+- When the thread returns from the function it terminates.
+
+In C#, Threads are managed by the System.Threading.Thread class.
+
+- C# threads are passed a static or instance function of some C# class using a standard delegate of type ThreadStart.
+
+> Thread States
+
+A thread that has been started, but not yet terminated can be in one of the following states:
+
+- Running
+- Waiting to run
+- Suspended
+- Blocked
+
+> Thread Properties
+
+IsBackground – get, set
+
+- Process does not end until all Foreground threads have ended.
+- Background threads are terminated when application ends.
+
+CurrentThread– get, static
+
+- Returns thread reference to calling thread
+
+IsAlive– get
+
+- Has thread started but not terminated?
+
+Priority– get, set
+
+- Highest, AboveNormal, Normal, BelowNormal, Lowest
+
+ThreadState– get
+
+- Unstarted, Running, Suspended, Stopped, WaitSleepJoin, ..
+
+> Synchronization
+
+- When two or more threads share a common resource
+  access needs to be serialized - a process called
+  synchronization.
+
+- Consider the shared queue on the previous slide. Should the
+  parent start to enqueue an element in an empty queue, but
+  have its time-slice expire before finishing, the queues links
+  are in an undefined state.
+
+- Now, if the child thread wakes up, and attempts to dequeue
+  an element the result is undefined.
+
+> Locking Mechanisms
+
+The .Net Threading Library also provides:
+
+Monitor
+
+- Locks an object, like C# lock, but provides more control.
+
+Interlocked
+
+- Provides atomic operations on 32 bit and 64 bit data types, e.g., ints, longs, pointers.
+
+Mutex
+
+- Guards a region of code.
+- Can synchronize across process boundaries.
+
+AutoResetEvent and WaitOne
+
+- Allows fine-grained control of the sequencing of thread operations.
+
+ReaderWriterLock
+
+- Locks only when writing, allowing free reads.
+
+### Lecture 3: Race Conditions
+
+> Advantages of Multithreading
+
+- It executes multiple process simultaneously.
+- Maximize the utilization of CPU resources.
+- Time sharing between multiple process.
+- To maintain a responsive user interface.
+- To make an efficient use of processor time, while waiting I/O operation to complete.
+- To split large CPU- bound task to be processed simultaneously on a machine, which has multiple processors/cores. Different processors execute different thread simultaneously, so performance improves.
+
+> Disadvantages of threads
+
+- With more threads, the code becomes difficult to debug and maintain.
+- Thread creation puts a load on the system in terms of memory and CPU resources.
+- We need to do exception handling inside the worker method as any unhandled
+  exceptions can result in the program crashing.
+- If the machine is single processor/cores, then the multithreading causes the overhead
+  over the processor, as it is using context switching.
+  - Context switching means the division of single processor time to the multiple threads, while
+    switching time from one thread to other may also consume some time. Hence, overall performance is
+    affected adversely.
+- Obviously, you have to write more lines of code. Multithreaded Applications are
+  difficult to write, understand, debug and maintain.
+- Note: Hence, only use multithreads, if the advantages are greater than the
+  disadvantages.
+
+> Race Condition
+
+- A race condition occurs when two or more threads are able to access shared data and
+  they try to change it at the same time.
+- Thread scheduling algorithm can swap between threads at any point, we cannot know
+  the order at which the threads will attempt to access the shared data.
+- The result of the change in data is dependent on the thread scheduling algorithm, i.e.
+  both threads are 'racing' to access/change the data.
+- The reason for having more race conditions among threads than processes is that
+  threads can share their memory while a process can not.
+
+> Types of Race Conditions
+
+Race conditions can occur when two or more threads read and write the same variable
+according to one of these two patterns:
+
+- Read-modify-write
+- Check-then-act
+
+- The read-modify-write pattern means, that two or more threads first read a given variable, then modify its
+  value and write it back to the variable. For this to cause a problem, the new value must depend one way
+  or another on the previous value. The problem that can occur is, if two threads read the value (into CPU
+  registers) then modify the value (in the CPU registers) and then write the values back.
+- The check-then-act pattern means, that two or more threads check a given condition, for instance if a Map
+  contains a given value, and then go on to act based on that information, e.g. taking the value from the
+  Map. The problem may occur if two threads check the Map for a given value at the same time - see that
+  the value is present - and then both threads try to take (remove) that value. However, only one of the
+  threads can actually take the value. The other thread will get a null value back.
+
+  > Avoid race conditions
+
+- C# provide number of ways to avoid race conditions depending on the type of
+  application.
+- Common method that works in any condition is using Wait Handles and Signaling
+- From the previous exercise, we will try to ensure that the first thread is the last one that
+  writes value to result variable.
+- The process is quite simple let all threads are started at the same time. But the first
+  thread is forced to wait till second and third thread signal that they are done.
+- Similarly the main thread is forced to wait till the first thread completes. This ensures
+  that the Console.WriteLine() is not called before the other threads finish their work.
+- To implement this we need to declare AutoResetEvent for each thread (except the main
+  one). Whenever a thread finishes execution it signals its respective AutoResetEvent by
+  calling Set(). The first thread waits for both second and third thread to signal and then
+  starts execution.
+- Similarly the main thread waits for the first thread to signal before it prints the value.
+  This method will always ensure that the final result is 1.
+
+> Thread Synchronization
+
+- Synchronization is a technique that allows only one thread to access the resource for the
+  particular time. No other thread can interrupt until the assigned thread finishes its task.
+- In multithreading program, threads are allowed to access any resource for the required
+  execution time.
+- Threads share resources and executes asynchronously.
+- Accessing shared resources (data) is critical task that sometimes may halt the system.
+  We deal with it by making threads synchronized.
+- It is mainly used in case of transactions like deposit, withdraw etc.
+
+> Classic problems of Synchronization
+
+1. The Producer-Consumer Problem
+2. The Readers-Writers Problem
+3. The Dining Philosopher Problem
+
+- These problems are used to test every newly proposed synchronization techniques.
+
+> Synchronization Mechanism
+
+Synchronization is handled with the following four categories:
+
+1. Blocking Methods (Sleep, Join,Task.Wait)
+2. Locking Construct (Lock, Mutex)
+3. Signaling
+4. No Blocking Synchronization
+
+### Lecture 5: Synchronization-Mutex
+
+> Mutex
+
+- Mutex object is used when you have number of threads trying to access
+  critical section.
+- Mutex provide high level synchronization when you have multiple threads by
+  allowing one thread to access the critical section of code.
+- Mutex can work across multiple processes. In other words, Mutex can be
+  computer-wide as well as application-wide.
+
+> Local and System Mutexes
+
+1. Mutexes are of two types: local mutexes and named system mutexes.
+2. If you create a named system mutex object using a constructor that accepts a
+   name.
+3. It will be associated with an operating-system object of that name.
+4. Named system mutexes are visible throughout the operating system and can be
+   used to synchronize the activities of processes.
+5. A local mutex exists only within your process. It can be used by any thread
+   in your process that has a reference to the local Mutex object. Each Mutex
+   object is a separate local mutex.
+
+> Abandoned Mutexes
+
+1. If a thread terminates without releasing a Mutex, the mutex is said to be
+   abandoned.
+2. This often indicates a serious programming error because the resource the
+   mutex is protecting might be left in an inconsistent state.
+3. An AbandonedMutexException is thrown in the next thread that acquires the
+   mutex.
+4. In the case of a system-wide mutex, an abandoned mutex might indicate that an
+   application has been terminated abruptly (for example, by using Windows Task
+   Manager).
+
+> Livelock
+
+A Livelock is a situation where a request for an exclusive lock is denied
+repeatedly, as many overlapping shared locks keep on interfering each
+other. The processes keep on changing their status, which further prevents
+them from completing the task. This further prevents them from completing
+the task.
+
+Example 1:
+An easiest example of Livelock would be two people who meet face-to-face
+in a corridor, and both of them move aside to let the other pass. They end
+up moving from side to side without making any progress as they move the
+same way at the time. Here, they never cross each other.
+
+> Deadlock
+
+A deadlock is a situation that occurs in OS when any process enters a waiting state
+because another waiting process is holding the demanded resource. Deadlock is a
+common problem in multi-processing where several processes share a specific type of
+mutually exclusive resource known as a soft lock or software.
+
+Example of Deadlock
+
+- A real-world example would be traffic, which is going only in one direction.
+- Here, a bridge is considered a resource.
+- So, when Deadlock happens, it can be easily resolved if one car backs up (Preempt resources and rollback).
+- Several cars may have to be backed up if a deadlock situation occurs.
+- So starvation is possible.
+
+> Starvation
+
+Starvation is a situation where all the low priority processes got blocked, and the high
+priority processes proceed. In any system, requests for high/low priority resources keep
+on happening dynamically. Thereby, some policy is require to decide who gets support
+when.
+
+Using some algorithms, some processes may not get the desired serviced even though
+they are not deadlocked. Starvation occurs when some threads make shared resources
+unavailable for a long period of time.
+
+Example of Starvation:
+• For example, an object offers a synchronized method which likely to take a long time to
+return. If one thread uses this method frequently, other threads that also need
+frequent synchronized access to the same object will often be blocked.
+
+> Difference Between Deadlock, Starvation, and Livelock
+
+- A deadlock is a situation that occurs in OS when any process enters in a waiting state because the demanded resource is being held by another waiting process.
+- A livelock, on the other hand, is almost similar to a deadlock, except that the states of the processes which are involved in a livelock always keep on changing to one another, none progressing.
+- So, Livelock is a unique case of resource starvation.
+
+### Lecture 6: Synchronization-Semaphores
+
+> Mutex Class
+
+- Mutex is used to synchronize access to shared resources
+- In case a thread already acquired the mutex, another thread requiring the mutex will be blocked until the mutex is released
+- But, how is Mutex different than using Monitor??
+- Unlike monitor, mutex can be used for inter-process synchronization.
+- Mutex can be of two types:
+  - Local Mutex (also called unnamed mutex): this type is used to synchronize threads within a process
+  - Gloabal Mutex (also called named mutex): this type is used to synchronize inter-process threads (at OS level)
+- Microsoft recommends using monitor for inter-thread
+  communication and mutex for inter-process communication
+- The reason is that mutex implementation is heavy
+- Abandoned Mutex:
+  - A mutex must be released using MutexRelease() method before the thread ends. Otherwise, it is said to be an abandoned Mutex and will throw an exception
+  - An abandoned mutex questions the integrity of the data being protected by the mutex
+
+> Semaphore Class
+
+- Semaphore is an integer variable that solves the problem of critical section. After
+  accessing it can only be accessed by two atomic operations.
+
+- Almost similar to the Monitor Class, the only difference is
+  that a semaphore defines the maximum number of
+  threads to access the resource rather than restricting it to
+  one thread
+
+Critical Section
+
+1. Mutual Exclusion
+2. Progress
+3. Bounded Wait
+
+- A semaphore is acquired by calling Wait() method
+  and released by calling Release()
+- Whenever a semaphore is acquired the remaining
+  number of slots to access the resource is
+  decremented. When the number is 0, the calling
+  thread will be suspended.
+- No ordering (e.g. FIFO or LIFO) for suspended
+  threads
+- Semaphore is a synchronization mechanism that allow more than
+  one thread accessing shared resource at the same time.
+- Useful in allocating collection of resources to limited number
+  of threads.
+- Example: Allowing 3 clients to access the Room reservation
+  service at the time.
+- In general using Semaphore: threads acquires permission to using
+  wait method and use the resources. Afterwards, thread releases
+  the permission.
+
+### Lecture 7: SOA(Service Oriented Application)
+
+> SOA
+
+- Service-Oriented Architecture (SOA) is an architectural style
+  that represents business functionality as implementation-
+  neutral, standards-based shared services
+- SOA is a natural progression in the evolution that accelerated with the advent of XML and
+  Web Services
+- SOA enables enterprises to be more agile and to respond more quickly to changing
+  business needs
+- Some characteristics of SOA are:
+
+  - Use of shared services — do not need to “reinvent the wheel”
+  - Loose coupling — can update applications with minimal effect on services that
+    invoke them
+  - Location transparency — can re-host applications with minimal effect on services that invoke them
+  - Based on open standards — decreased dependence on vendor-specific solutions
+
+### Lecture 8: SOA-WCF
+
+> What is WCF
+
+- WCF stands for Windows Communication Foundation. WCF is Microsoft platform for
+  Building distributed and Interoperable applications.
+- In simple terms, distributed application is an application that consists of components
+  that operates on 2 or more computer nodes. Distributed application are connected
+  systems working in parallel.
+- WCF is technology used to develop application using Service Oriented Architecture.
+- Any enterprise web application may have following layers and architectural tiers
+- Presentation Tier
+- Business Tier
+- Data-Access Tier
+- Why Distributed Applications:
+  - Interoperatoable Services among ERP applications. (E.g., E-Commerce applications
+    using pay-pal services)
+  - Scalability: To improve processing capability, application tiers running on different
+    machines.
