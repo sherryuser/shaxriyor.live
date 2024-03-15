@@ -12,7 +12,7 @@ export default function Comment() {
       repo={(process.env.NEXT_PUBLIC_GISCUS_REPO as Repo) || ''}
       repoId={process.env.NEXT_PUBLIC_GISCUS_REPO_ID || ''}
       category='General'
-      categoryId='DIC_kwDOE66rZ84B--B0'
+      categoryId='DIC_kwDOK8s0484Cb79k'
       mapping='pathname'
       reactionsEnabled='0'
       emitMetadata='0'
