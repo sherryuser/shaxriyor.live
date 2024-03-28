@@ -1,0 +1,758 @@
+---
+title: 'InfoSec Preparation'
+publishedAt: '2024-03-28'
+description: 'Inforamtion Security module possible questions with answers for preparation to the in-class test'
+englishOnly: 'true'
+banner: 'infosec'
+tags: 'Programming'
+---
+
+> atria.saunter.08@icloud.com
+
+# Part A
+
+# Cryptography
+
+## What’s cryptosystem?
+
+A cryptosystem is a 5-tuple consisting of (E, D, M, K, C)
+
+- E is an encryption algorithm
+- D is an decryption algorithm
+- M is the set of plaintexts/ message
+- K is the set of keys
+- C is the set of ciphertexts
+
+Cryptosystem: is a system where a sender transforms unconcealed data called plain text into concealed data called cipher text using encryption algorithm
+
+- The receiver then transforms the received cipher text back to the plain text using a decryption algorithm
+- Encryption and Decryption algorithms are known as ciphers
+- Ciphers use special codes called keys
+
+### What’s Private cryptosystem? (Symmetric)
+
+The encryption scheme is not secret
+
+- The attacker knows the encryption scheme
+- The only secret is the key
+- The key must be chosen at random; kept secret
+- Symmetric cryptography is often used to safeguard the local storage of sensitive data on drives or servers
+- Usually used for encrypting large volumes of data
+
+Some arguments in favor of this principle
+
+- Easier to keep key secret than algorithm
+- Easier to change key than to change algorithm
+- Standardization
+  - Ease of deployment
+  - Public validation
+
+### Use cases
+
+- Disk encryption is a technique used to encrypt the entire contents of a disk or storage device, making the data inaccessible without the appropriate decryption key.
+- Encryption: When a user enables disk encryption on their device (such as a computer, smartphone, or external hard drive), the encryption software generates a symmetric encryption key (e.g., AES key).
+- The encryption software then encrypts the entire contents of the disk using this symmetric encryption key. This process typically includes the operating system, user files, applications, and any other data stored on the disk.
+- Decryption: When the user wants to access the data on the encrypted disk, they provide the encryption software with the decryption key (symmetric key).
+- The encryption software decrypts the encrypted data using the provided symmetric key, making the data accessible to the user.
+
+### What’s Public cryptsystem? (Asymmetric)
+
+- Known as asymmetric cryptography
+- The encryption and decryption keys are different.
+- Since different keys are used, it's possible to make the encryption key public
+- Uses two separate keys instead of one shared one
+- Encryption key = the public key
+- Decryption key = the private key
+- Public key cryptography is an important technology for Internet security
+- It is widely used. TLS/SSL, RSA, DSA (Digital Signature Algorithm)
+
+### Difference between symmetric and asymmetric
+
+- Private key cryptography is still widely used today alongside public key cryptography
+- They serve different purposes; different advantages and use cases
+- Some common algorithms used in private key cryptography include: AES, DES, Blowfish, Twofish
+- Public key cryptography > blockchain and cryptocurrency/ creating digital signatures in operating systems
+- The complexity and length of a private key determine how safe a certain encoded piece of data is and how susceptible it is to a brute-force attack
+
+## Types of ciphers
+
+### Substitution ciphers
+
+Each character to another character/number. This technique changes the identity of a character but not its position in the string
+
+### Transposition ciphers
+
+Scrambles the symbols to produce output. Each character's position is shifted to a different position. Character position is changed but identity remains same.
+
+### Caeser cipher
+
+### Vigenar cipher
+
+### Rail Fence Cipher
+
+### Playfair Cipher
+
+### Block Cipher
+
+A block cipher is one in which a block of plaintext is treated as a whole and used to produce a ciphertext block of equal length.
+
+- Typically, a block size of 64 or 128 bits is used.
+- So for example, a 64-bit block cipher will take in 64 bits of plaintext and encrypt it into 64 bits of ciphertext.
+
+Examples of block cipher:
+
+- Data Encryption Standard (DES)
+- Triple DES
+- Advanced Encryption Standard (AES)
+- International Data Encryption Algorithm (IDEA)
+- Blowfish,
+- Twofish
+- RC5
+
+### Stream Cipher
+
+Examples of stream cipher:
+
+- RC4 algorithm, - widely used in various applications, including SSL/TLS protocols, but its usage has declined due to security vulnerabilities
+- Salsa20/ChaCha – VPN, Disk Encryption, Tor (The Onion Router)
+- A5/1 and A5/2 - used in GSM (Global System for Mobile Communications) cellular networks for voice encryption, 4G, 5G
+- E0 (Bluetooth Encryption)
+- Rabbit – e.g in disk encryption
+
+### Feistel Cipher Structure
+
+Most symmetric block ciphers are based on a Feistel Cipher Structure. For defining the complexity level of an algorithm few design principles are to be considered.
+
+1. Number of Rounds
+2. Design of function F
+3. Key schedule algorithm
+
+- Symmetric structure used in block ciphers
+- Developed by German-born physicist and cryptographer Horst Feistel
+- IBM
+- Known as fiestel network
+
+Principles
+
+1. Block Division- The input block of plaintext is divided into two equal halves.
+2. Round Function- The Feistel cipher iterates through a series of rounds, each consisting of a round function.
+3. Key Schedule- In each round, a subkey derived from the main encryption key is used
+4. Iteration: The Feistel cipher iterates through multiple rounds, typically 16 rounds for many modern block ciphers. Each round uses a different round key generated from the main encryption key.
+5. Reversibility: The Feistel cipher is reversible. To decrypt the ciphertext, the same algorithm is applied, but the round keys are used in the reverse order.
+6. Final Permutation: After all rounds have been completed, a final permutation is applied to the block to ensure that the final output does not directly resemble the original plaintext.
+
+<img src='/images/blog/infosec-1.png' width='1440' />
+
+Design Elements
+
+- block size
+- key size
+- number of rounds
+- subkey generation algorithm
+- round function
+- fast software en/decryption
+- ease of analysis
+
+### Block Cipher vs Stream Cipher
+
+- The big difference between the two is how the data gets encrypted
+- There are advantages and disadvantages to each method
+
+**Block Cipher** - Encrypting information in chunks. A block cipher breaks down plaintext messages into fixed-size blocks before converting them into ciphertext using a key.
+
+<img src='/images/blog/infosec-2.png' width='1440' />
+
+Stream Cipher - A stream cipher, on the other hand, breaks a plaintext message down into single bits, which then are converted individually into ciphertext using key bits.
+
+<img src='/images/blog/infosec-3.png' width='1440' />
+
+> Classical Cryptography manipulates traditional characters
+>
+> Modern Cryptography operates on binary bit sequences
+
+## DES/AES
+
+### **AES (Advanced Encryption Standard)**
+
+AES is a symmetric encryption standard adopted worldwide. It encrypts data blocks of 128 bits using symmetric keys of 128, 192, or 256 bits. Here's a simplified overview of how AES works:
+
+1. **Key Expansion**: AES first expands the original key to a series of round keys, one for each encryption round, using an algorithm called the Rijndael key schedule.
+2. **Initial Round**:
+   - **AddRoundKey**: The initial block of plaintext is combined with the first expanded key using a bitwise XOR operation.
+3. **Main Rounds**: Each main round (the number of rounds depends on the key size: 10 for 128-bit keys, 12 for 192-bit keys, and 14 for 256-bit keys) consists of four steps:
+   - **SubBytes**: A non-linear substitution step where each byte is replaced with another according to a lookup table (S-box).
+   - **ShiftRows**: A transposition step where each row of the state is shifted cyclically a certain number of steps.
+   - **MixColumns**: A mixing operation which operates on the columns of the state, combining the four bytes in each column.
+   - **AddRoundKey**: The result is combined with the round key using bitwise XOR.
+4. **Final Round**:
+   - The final round is similar to the main rounds but omits the MixColumns step. It includes SubBytes, ShiftRows, and AddRoundKey.
+
+### **DES (Data Encryption Standard)**
+
+DES is an older symmetric key encryption standard that encrypts data in 64-bit blocks using a 56-bit key. It was widely used but is now considered insecure due to the small key size. DES operates as follows:
+
+1. **Key Schedule**: The 56-bit key is permuted and divided into 16 subkeys, one for each round of the encryption process.
+   1. **Main Rounds**: There are 16 rounds of processing in DES. Each round consists of:
+      - **Expansion**: The 32-bit half of the block is expanded to 48 bits using an expansion permutation table.
+      - **Key Mixing**: The expanded block is mixed with a round key using XOR.
+      - **Substitution**: The result is divided into eight 6-bit blocks, each of which is then substituted using an S-box, producing an 8x4-bit output.
+      - **Permutation**: The substituted block is permuted again.
+      - After these steps, the left and right halves of the block are swapped.
+2. **Initial Permutation (IP)**: The data block is initially permuted using a fixed table.
+3. **Final Permutation (FP)**: After all rounds, a final permutation is applied to the result of the last round.
+
+In summary, AES is more secure due to its larger key sizes and more complex algorithms, while DES, although influential in the development of encryption standards, has been largely replaced by AES and other more secure algorithms due to its vulnerability to brute-force attacks
+
+<img src='/images/blog/infosec-4.png' width='1440' />
+
+## RSA encryption (Asymmetric)
+
+RSA (Rivest–Shamir–Adleman) is an asymmetric encryption algorithm used widely for secure data transmission. Unlike symmetric algorithms, which use the same key for encryption and decryption, RSA uses a pair of keys: a public key for encryption and a private key for decryption. Here's how RSA works:
+
+### 1. Key Generation
+
+1. **Choose two large prime numbers:** Call them \(p\) and \(q\).
+2. **Compute \(n = p \times q\):** This number \(n\) is used as the modulus for both the public and private keys. Its length, usually expressed in bits, is the key length.
+
+3. **Calculate the totient function \(\phi(n) = (p-1) \times (q-1)\):** This value is used in determining the public and private keys.
+
+4. **Choose an integer \(e\) as the public exponent:** \(e\) is typically chosen to be 65537 for its properties of being a prime number and not too large. It must be in the range \(1 < e < \phi(n)\) and coprime to \(\phi(n)\).
+
+5. **Calculate \(d\), the modular multiplicative inverse of \(e\) mod \(\phi(n)\):** \(d\) is the private exponent. The equation \(d \times e \equiv 1 \mod \phi(n)\) holds.
+
+The public key is the pair \((n, e)\), and the private key is \((n, d)\).
+
+### 2. Encryption
+
+To encrypt a message \(m\) (where \(m\) is a number smaller than \(n\)) using the recipient's public key \((n, e)\), compute the ciphertext \(c\) using the formula:
+
+\[c = m^e \mod n\]
+
+### 3. Decryption
+
+To decrypt the ciphertext \(c\) using the private key \((n, d)\), compute the original message \(m\) using the formula:
+
+\[m = c^d \mod n\]
+
+### How RSA Works Conceptually
+
+- **Key Generation:** The security of RSA is based on the fact that, given the public key \((n, e)\), it is difficult to factor \(n\) back into \(p\) and \(q\) without the private key. Generating the keys involves choosing primes and computing mathematical relationships between them.
+
+- **Encryption:** Anyone can encrypt a message using the recipient's public key. The message is transformed in such a way that it can only be reversed (decrypted) with the corresponding private key.
+
+- **Decryption:** Only the recipient, who possesses the private key, can decrypt the message. This process reverses the encryption to recover the original message.
+
+### Key Points
+
+- RSA encryption and decryption are computationally intensive, especially for longer keys, which are necessary for strong security.
+- The security of RSA relies on the practical difficulty of factoring the product of two large prime numbers, the factoring problem.
+- RSA allows confidential communication and digital signatures, essential for secure online transactions.
+
+RSA demonstrates the power of public-key cryptography: secure communication can happen over an insecure channel without sharing secret keys in advance.
+
+### **Practical Usage**
+
+RSA is commonly used for secure data transmission, digital signatures, and key exchange in cryptographic protocols. However, due to its computational complexity, it's often used to encrypt small data quantities or to encrypt a symmetric key which is then used for bulk data encryption.
+
+In summary, RSA's security relies on the mathematical challenge of the factoring problem, and its asymmetric nature makes it suitable for a variety of security applications, including confidentiality, integrity, and authentication in digital communications.
+
+# Network Security
+
+## What is Network Security?
+
+- Protecting a company`s network from breaches, intrusions and other threats
+- Can be hardware or software solutions
+- Can be policies, procedures and controls
+- The aim is to secure confidentiality and availability of the network
+  Examples: Access Control, Antivirus, Firewalls, VPNs, IDS, IPS, Encryption, Security
+  Monitoring and Incident Response
+
+## How to Protect Network?
+
+1. Performing security risk assessments
+2. Security Policies (acceptable use, access controls, data handling procedures,
+   password policies)
+3. Design secure network architecture (network segmentation)
+4. Implement security technologies (Firewall, VPN, IDS, IPS, encryption)
+
+## What is Network Segmentation?
+
+Network Segmentation is dividing a network into multiple smaller networks called subnets. This limits the spread of attacks within networks, reduces congestion, and improves the performance by containing network traffic within segments, thereby also ensuring that sensitive data is compartmentalized and less accessible to unauthorized users.
+
+### Benefits:
+
+- Controlling the flow of traffic between subnets
+- Localizing technical network issues
+- Boosts network performance
+- Prevents unauthorized traffic from reaching sensitive portions of the network
+
+**Physical Segmentation** - utilizes routers, wiring, connections, switches, firewalls, and other hardware to divide an organization’s network into segments. Physical segmentation is generally simple to manage, given that security personnel can access all physical architecture in the same place.
+
+- Physical segmentation breaks networks down into multiple physical sections or subnets
+- A firewall acts as the gateway and controls traffic that comes in and out of the network, along with hardware like access points, routers, and switches
+
+**Logical Segmentation** - uses software tools to create separate, secure networks on the same physical infrastructure, like VLANs. This allows for more flexible and cost-effective network management.
+
+## What is VLAN?
+
+VLANs are logical networks created within a physical network infrastructure.
+
+- Devices in a VLAN can communicate with each other as if they were on the same physical network, even if they are physically located in different parts of the network.
+  Example: In a corporate environment, VLANs can be created for different departments such as HR, Finance, IT, and Sales. Each department is assigned to a separate VLAN, allowing for isolation of network traffic and application-specific policies. VLANs ensure that each department's traffic is isolated and secured from other departments.
+
+## What is Firewall?
+
+A firewall is a network security device that monitors incoming and outgoing network traffic and decides whether to allow or block specific traffic based on a defined set of security rules. Its primary function is to block unauthorized access while permitting outward communication. The purpose of a firewall is to control the passage of TCP/IP packets between hosts
+and networks.
+
+### Packet Filtering (Stateless)
+
+> A packet **filtering firewall** is a network security device that **filters incoming and outgoing network packets based on a predefined set of rules**. Rules are typically based on IP addresses, port numbers, and protocols.
+>
+> Limitations:
+>
+> - Works mainly at the network layer (extensions possible with extended ACLs)
+> - Easily breakable by address spoofing
+> - Uses up router resources
+> - No logging or user authentication capabilities
+
+### Stateful Inspection Firewall
+
+> A stateful firewall is a firewall that monitors the full state of active network connections
+>
+> - As the name implies, a stateful packet filter adds state to a packet filter firewall.
+> - Monitors ongoing connections and remember past ones
+>
+> pros/cons:
+>
+> - In addition to all of the features of a packet filter, it also keeps track of ongoing connection
+> - Prevents many attacks, such as the TCP ACK scan
+> - However, it cannot examine application data
+> - Slower than packet fileting firewall
+
+### Proxy Firewall
+
+> An application proxy firewall processes incoming packets all the way up to the application layer ( layer 7)
+>
+> - Reading and filtering application protocols (FTP, HTTP, DNS, SMTP, etc)
+> - The application proxy is able to filter bad data at the application layer (such as viruses) while also filtering bad packets at the transport layer
+>
+> pros/cons:
+>
+> - Application proxies have a complete view of connections and application data
+> - Disadvantages are speed and additional expenses
+
+### Circuit Gateway Firewall
+
+- Tracks all traffic from Layer 2 to the application layer for more accurate insights than other methods
+
+> Operate on session layer (layer 5) monitors TCP handshakes and other network protocol session initiation messages across the network Similar to proxy firewall
+>
+> - No application layer monitoring
+> - Circuit-level gateways are typically used alongside application-level gateways
+
+### Next Generation Firewall (NGFW)
+
+> Combines the features of a traditional firewall with additional capabilities such network intrusion, deep packet inspection, advanced threat detection and prevention
+>
+> - Threat specific
+> - Designed to examine and identify specific threats, such as advanced malware, at a more granular level.
+>
+> pros/cons:
+>
+> - costly
+
+## Dos, DDos
+
+Denial of Service (DoS) and Distributed Denial of Service (DDoS) attacks aim to disrupt the normal functioning of a targeted server, service, or network by overwhelming it with a flood of internet traffic. Categories of Dos/DDos attacks:
+
+- Volumetric attacks - Consumes the bandwidth of a target
+- Fragmentation attacks - Overwhelms the target’s ability to re-assemble fragmented packets
+- Teardrop attack
+- TCP state-exhaustion attacks - Consumes available connections
+- Application layer attacks - Exploit an application vulnerability to restrict its resources
+
+### Countermeasure strategies:
+
+- Absorbing the attack - Add additional resources to resist the attack
+- Degrading services - Stop non-critical services
+- Shutting down services - Plan to go off-line until the attack is over!
+- Perform post - attack forensics to mitigate future incidents
+
+## What’s VPN?
+
+A **Virtual Private Network (VPN)** is a technology that allows you to create a secure connection over a less-secure network, such as the internet. It enables a computer or network-enabled device to send and receive data across shared or public networks as if it were directly connected to a private network.
+
+- Implementation of cryptographic technology
+- Provides privacy and anonymity by encrypting your data
+
+### **Benefits of a VPN**
+
+1. **Security**: Encrypts your internet connection to protect your data from hackers, especially when using public Wi-Fi.
+2. **Privacy**: Hides your IP address, preventing others from tracking your online activities.
+3. **Remote Access**: Allows employees to access their company's network securely from a remote location.
+4. **Bypass Geo-restrictions**: Enables users to access content and services that are geographically restricted.
+5. **Avoid Bandwidth Throttling**: Helps prevent your internet service provider from intentionally slowing down your internet connection.
+
+### How does VPN work?
+
+A VPN works by routing your device's internet connection through the VPN's private server rather than your internet service provider (ISP). This means that when data is transmitted to the internet, it comes from the VPN rather than your computer. Here’s how it works:
+
+1. **Initiation**: You connect to the VPN server, which requires authentication.
+2. **Tunneling**: Once authenticated, a virtual tunnel is created between your device and the server.
+3. **Encryption**: All data passing through this tunnel is encrypted, ensuring privacy and security.
+4. **Decryption**: The VPN server decrypts the data it receives before sending it to the intended destination.
+
+### VPN Tunnel
+
+A VPN tunnel is a direct link between your device and the internet through the VPN server. It's called a "tunnel" because it provides a secure pathway through the open internet, shielding the data traveling through it from external view.
+
+### Basic VPN Requirements:
+
+- User Authentication - VPN must be able to verify user authentication and allow only authorized users to access the network
+- Address Management - Assign addresses to clients and ensure that private addresses are kept private on the VPN
+- Data Encryption - Encrypt and decrypt the data to ensure that others on the not have access to the data
+- Key Management - Keys must be generated and refreshed for encryption at the server and the client. Note that keys are required for encryption
+- Multi-protocol Support - The VPN technology must support commons protocols on the Internet
+
+### **Difference between Firewall and VPN**
+
+- **Firewall**: A firewall is a security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules. It establishes a barrier between a trusted internal network and untrusted external network, such as the internet, and controls access to the resources of a network through a positive control model.
+- **VPN**: While a VPN also contributes to security, its primary role is to encrypt and protect your internet connection and data transfer, even over unsecured networks. It creates a secure and private connection to a network, often over the internet, to shield your activities and data from eavesdroppers.
+
+In summary, while both firewalls and VPNs are critical for cybersecurity, they serve different purposes: firewalls act as gatekeepers for incoming and outgoing traffic, while VPNs secure and privatize your online activities and data transmission over the internet.
+
+## What’s IDS
+
+IDS is used to monitor a network, which then sends alerts when suspicious events on a system or network are detected.
+
+Two detection approaches:
+
+### Signature-Based Detection (Knowledge-Based)
+
+detect attacks based on specific known signatures/patterns
+
+- **How it Works**: Signature-based IDS detects intrusions by comparing the observed activities with predefined signatures or patterns of known malicious or suspicious behavior. These signatures could be patterns of bytes in network traffic, known malicious instruction sequences in software, or specific behaviors that indicate a security threat.
+- **Strengths**: Highly effective at detecting known threats and providing fast, accurate identification of repeated attacks. (Simple and efficient)
+- **Weaknesses**: Cannot detect new, unknown threats (zero-day attacks) or variations of known threats that do not match the existing signatures. (Only known attacks)
+
+### Anomaly-Based Detection (Behavior-Based)
+
+defines a baseline of normal behaviour and provide a warning whenever a system strays too far from this baseline
+
+- **How it Works**: Anomaly-based IDS establishes a baseline of normal network or system behavior through continuous monitoring and then uses statistical methods, machine learning, or artificial intelligence to detect deviations from this baseline. Any significant deviation is flagged as potentially malicious.
+- **Strengths**: Capable of detecting new and unknown threats by identifying activities that are abnormal or deviate from established patterns.
+- **Weaknesses**: Higher false-positive rate compared to signature-based IDS, as legitimate but unusual activities might be flagged as threats.
+
+### Deployment Models
+
+IDS systems can also be categorized by their deployment models, which include:
+
+- **Network-Based IDS (NIDS)**: Monitors network traffic for suspicious activity and alerts administrators to potential threats. Deployed at strategic points within the network to monitor traffic to and from all devices on the network.
+- **Host-Based IDS (HIDS)**: Installed on individual hosts or devices and monitors inbound and outbound packets from the device only, as well as system files and configurations. It can detect attacks that may be missed by NIDS, such as those launched by authenticated users or malware.
+
+### IDS vs Firewall **Key Differences**
+
+- **Proactive vs. Reactive**: Firewalls are proactive, blocking threats based on predefined rules, while IDS systems are more reactive, identifying and alerting on potential threats.
+- **Action Taken**: Firewalls prevent unauthorized access by blocking traffic, whereas IDS detects and alerts on possible security incidents without necessarily blocking traffic.
+- **Visibility and Coverage**: IDS provides a deeper insight into network traffic and can detect a broader range of threats, including those within encrypted traffic, if designed to do so. Firewalls primarily focus on permitting or denying access based on surface-level inspection and predefined rules.
+
+## What’s IPS
+
+IPS are active security systems that go beyond intrusion detection by not only identifying security threats but also taking immediate action to block or prevent them. Can automatically respond to detected threats by blocking malicious traffic, dropping packets, or taking other predefined actions to mitigate the risk.
+
+IPS can do the following after it identifies a threat:
+
+- Terminate the TCP session that has been exploited
+- Block the offending source IP address or user account from accessing any application, target host or other network resources unethically
+- Reprogram or reconfigure firewall to prevent similar attack from occuring in the future
+- Replace or remove any malicious content that remains on the network following an attack.
+
+<img src='/images/blog/infosec-5.png' width='1440' />
+
+## Password Authentication Scheme
+
+1. The passwords or verification tables are not stored in the system.
+2. The passwords can be chosen and changed freely by the users.
+3. The passwords cannot be revealed by the administrator of the server.
+4. The passwords are not transmitted in plain text over the network.
+5. The length of a password must be appropriate for memorization.
+6. The scheme must be efficient and practical.
+7. Any unauthorized login can be quickly detected when a user inputs a wrong password.
+8. A session key is established during the password authentication process to provide confidentiality of communication.
+9. The ID should be dynamically changed for each login session to avoid partial information leakage about the user’s login message.
+10. The proposed scheme is still secure even if the secret key of the authentication server is leaked out or stolen.
+
+### Multi-factor Authentication
+
+Requires 2 or more independent factors to grant user access to a system:
+
+- ✓ Something you know - a password or a pin
+- ✓ Something you have - mobile phone or a security token
+- ✓ Something you are - fingerprint or FaceID
+- ✓ Something you do - typing speed, locational information etc.
+
+### Authorization in OS
+
+**Role-Based Access Control (RBAC):** Many modern operating systems, such as
+Windows and Linux, use RBAC to manage authorization. Users are assigned to
+roles, and permissions are granted to those roles. Administrators can then assign
+users to roles based on their job responsibilities.
+
+**Access Control Lists (ACLs):** ACLs specify which users or groups have access to
+specific files, directories, or resources. Administrators can set permissions at the
+individual level, granting or denying access to specific users or groups.
+
+### Authorization in DB
+
+**User-Based Permissions:** Database management systems (DBMS) allow
+administrators to grant or revoke permissions to individual users or roles.
+Permissions can be set at the database, table, or column level, specifying which
+users can read, write, modify, or delete data.
+
+**Stored Procedures and Views:** DBMS may use stored procedures or views to
+implement finer-grained access control. These mechanisms allow administrators to
+control access to specific operations or subsets of data within the database.
+
+### Authorization in Web Applications
+
+**Role-Based Access Control (RBAC):** Web applications often use RBAC to manage
+authorization. Users are assigned roles (e.g., admin, user, guest), and permissions
+are associated with those roles. Access to certain pages or functionalities is
+restricted based on the user's role.
+
+**Token-Based Authorization:** Web applications may use tokens, such as JSON Web
+Tokens (JWT), for authorization. Users obtain a token upon authentication, which
+contains information about their permissions. The token is then included in
+subsequent requests to the server to authorize access to protected resources.
+
+### Authorization in Networks
+
+**Firewall Rules:** Network devices, such as firewalls and routers, use access control
+lists (ACLs) to control traffic flow within a network. Administrators define rules that
+specify which IP addresses, ports, or protocols are allowed or denied access to the
+network.
+
+**Virtual Private Networks (VPNs):** VPNs use authentication and authorization
+mechanisms to control access to network resources. Users must authenticate
+themselves before being granted access to the VPN, and authorization rules
+determine which resources they can access once connected.
+
+## What is Single Sign-On?
+
+The diagram above illustrates the architecture of Single Sign-On (SSO). It shows how a user logs into the authentication server, receives a token, and then uses this token to access various services, highlighting the centralized authentication point and distributed access to multiple applications.
+
+Here are three advantages of SSO:
+
+- **Enhanced User Experience**: SSO simplifies the login process for users, allowing them to access multiple applications with a single set of credentials. This convenience improves user satisfaction and productivity.
+- **Reduced Password Fatigue**: Users only need to remember one set of credentials, reducing the likelihood of password fatigue and the consequent security risks associated with managing multiple passwords.
+- **Streamlined IT Management**: SSO enables centralized management of user access and authentication, making it easier for IT departments to enforce security policies, monitor user activities, and manage user accounts efficiently.
+
+# Software Security
+
+## List of software security bugs
+
+Functional Bugs
+
+- Login button doesn't allow users to login
+- Add to cart button that doesn't update the cart
+- Search box not responding to a user's query, etc
+
+Security Bugs (they can be exploited by attackers to compromise the confidentiality, integrity, and availability of systems and data)
+
+- SQL injection vulnerability
+- Cryptography
+- Broken access control
+- Vulnerable APIs
+
+## What are the security threats in Software Development?
+
+- Insecure APIs
+- SQL Injections
+  - This attack involves inserting or "injecting" malicious SQL queries via user input fields to manipulate or corrupt database systems, allowing attackers to view, modify, or delete unauthorized data.
+- Cross-site scripting (XSS)
+  - XSS occurs when an attacker injects malicious scripts (typically JavaScript) into web pages viewed by other users.
+- Malware
+  - Malware is software that is installed on a computer without the user's consent and that performs malicious actions, such as stealing passwords or money.
+- Phishing
+- Unpatched vulnerabilities
+- Poor password policies
+- Insufficient logging
+- Unauthorized access
+
+## What are the Software Security Principles? (ex. list 2-3 principles)
+
+### Principle of Least Privilege (**Privileges = Permissions**)
+
+The Principle of Least Privilege means giving someone only the minimum level of access or permissions they need to do their job and nothing more. For example, if someone needs to read documents but not edit them, they should only have permission to view those documents, not change them.
+
+Example, the backend server should only have access to the resources necessary to fulfill its functionality.
+
+### Defense in Depth
+
+Implement multiple layers of security controls and defenses throughout the software system. This approach ensures that if one layer is breached, there are additional layers of protection to prevent further exploitation.
+
+Example, Network Security Layer (Firewall, IDS, IPS), Perimiter Security Layer(Web Application Firewall, DDOS Protection), Authentication and Authorization layer (MFA, RBAC), Application security layer (secure coding practices), Data Security Layer (encryption), Incident Response Layer ( Incident Response Plan)
+
+### **Principle of Falling Securely**
+
+Systems should be designed to fail in a secure state to minimize the impact of
+
+security breaches or failures.
+
+Example, if an authentication system fails, it should default to denying access rather than granting unrestricted access.
+
+### **Principle of Open Design**
+
+The Principle of Open Design refers to the philosophy and practice of making the design of products, systems, or processes openly available to the public.
+
+Example, open source software development
+
+### **Principle of Separation of Duties**
+
+The Principle of Separation of Duties means splitting responsibilities and tasks among different people or systems to prevent any single person from having too much control or being able to commit fraud or errors without detection.
+Example, in a company, one person might be responsible for making a payment request, another for approving it, and a third for actually making the payment. This way, no one person can complete the process alone, reducing the risk of misuse or mistakes.
+
+## What is SDLC?
+
+A Secure SDLC requires adding security testing at each software development stage, from design, to development, to deployment and beyond.
+
+<img src='/images/blog/infosec-6.png' width='1440' />
+
+<img src='/images/blog/infosec-7.png' width='1440' />
+
+## OWASP Checklist
+
+<img src='/images/blog/infosec-8.png' width='1440' />
+
+> ZAP, formerly known as OWASP ZAP, is an open-source web application security scanner. It is intended to be used by both those new to application security as well as professional penetration testers.
+
+# Section B
+
+## Nmap (Network Mapper)
+
+Explanation: Nmap is used for network discovery and security auditing. It can scan for open ports, detect service versions, and even identify the operating system of a target.
+Example: Scan for open ports on a target IP.
+
+```shell
+nmap 192.168.1.1
+```
+
+## Nikto
+
+Explanation: Nikto is a web server scanner which checks for dangerous files/CGIs, outdated server software, and other problems.
+Example: Scan a website for vulnerabilities.
+
+```shell
+nikto -h www.example.com
+```
+
+## Ping
+
+Explanation: Ping is a network utility used to test the reachability of a host on an IP network and measure the round-trip time for messages sent from the originating host.
+Example: Ping a host to check if it's online.
+
+```shell
+bashCopy code
+ping www.example.com
+```
+
+## Hping3
+
+Explanation: Hping3 is a network tool able to send custom TCP/IP packets and to display target replies like ping does with ICMP replies.
+Example: Send SYN packets to port 80 of a target IP.
+
+```shell
+bashCopy code
+hping3 -S 192.168.1.1 -p 80
+```
+
+## Netcat
+
+Explanation: Netcat is a versatile networking tool used for reading from and writing to network connections using TCP or UDP.
+Example: Create a simple TCP connection to port 80 of a website.
+
+```shell
+bashCopy code
+nc www.example.com 80
+```
+
+## DMitry (Deepmagic Information Gathering Tool)
+
+Explanation: DMitry is capable of gathering data about a target, such as subdomains, email addresses, uptime info, and more.
+Example: Gather email addresses for a domain.
+
+```shell
+bashCopy code
+dmitry -e example.com
+```
+
+## Tcpdump
+
+Explanation: Tcpdump is a powerful command-line packet analyzer for Unix-like operating systems; it's used for network debugging and traffic monitoring.
+Example: Capture packets on the eth0 interface.
+
+```shell
+bashCopy code
+tcpdump -i eth0
+```
+
+## arp-scan
+
+Explanation: arp-scan sends ARP packets to hosts on the local network and displays any responses, useful for discovering physical devices on a network.
+Example: Scan your local network for devices.
+
+```shell
+bashCopy code
+sudo arp-scan --localnet
+```
+
+## Netdiscover
+
+Explanation: Netdiscover is an active/passive ARP reconnaissance tool, used for scanning networks to discover hosts.
+Example: Passively scan for network hosts.
+
+```shell
+bashCopy code
+netdiscover -p
+```
+
+## Wapiti
+
+Explanation: Wapiti allows you to audit the security of your web applications. It performs "black-box" scans, i.e., it does not study the source code but scans the webpages of the deployed web app.
+Example: Scan a website for vulnerabilities.
+
+```shell
+bashCopy code
+wapiti -u http://www.example.com
+```
+
+## theHarvester
+
+Explanation: theHarvester is used to gather open-source intelligence (OSINT), particularly around domain emails, subdomains, hosts, employee names, and more.
+Example: Gather emails related to a domain.
+
+```shell
+bashCopy code
+theharvester -d example.com -b all
+```
+
+## dig (Domain Information Groper)
+
+Explanation: dig is a tool for querying DNS name servers for information about host addresses, mail exchanges, name servers, and related information.
+Example: Query A records for a domain.
+
+```shell
+bashCopy code
+dig example.com A
+```
+
+## whois
+
+Explanation: whois is a protocol and utility used to query databases that store the registered users or assignees of an Internet resource, such as a domain name.
+Example: Perform a whois lookup for a domain.
+
+```shell
+bashCopy code
+whois example.com
+```
