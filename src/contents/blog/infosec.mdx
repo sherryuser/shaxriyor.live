@@ -629,130 +629,195 @@ A Secure SDLC requires adding security testing at each software development stag
 
 # Section B
 
-## Nmap (Network Mapper)
+## Whois
 
-Explanation: Nmap is used for network discovery and security auditing. It can scan for open ports, detect service versions, and even identify the operating system of a target.
-Example: Scan for open ports on a target IP.
+WHOIS is about registered domain names and IP addresses
+
+- Perform WHOIS lookup followed by target domain
 
 ```shell
-nmap 192.168.1.1
+whois itsecgames.com
 ```
 
-## Nikto
+## Dig
 
-Explanation: Nikto is a web server scanner which checks for dangerous files/CGIs, outdated server software, and other problems.
-Example: Scan a website for vulnerabilities.
+Dig is DNS information such as IP addresses, nameservers, and other DNS records
+
+- it's a command that queries the DNS server for the IPv4 address (A record) associated with the domain wiut.uz
 
 ```shell
-nikto -h www.example.com
+Dig wiut.uz A -4
 ```
 
-## Ping
+## Dmitry
 
-Explanation: Ping is a network utility used to test the reachability of a host on an IP network and measure the round-trip time for messages sent from the originating host.
-Example: Ping a host to check if it's online.
+Dmitry is subdomains, TCP port scan, email addresses, uptime information, whois lookups and more.
+
+- Use Dmitry tool to get all possible subdomains of a website. Document the screenshot
 
 ```shell
-bashCopy code
-ping www.example.com
+Dmitry -s wiut.uz
 ```
 
-## Hping3
-
-Explanation: Hping3 is a network tool able to send custom TCP/IP packets and to display target replies like ping does with ICMP replies.
-Example: Send SYN packets to port 80 of a target IP.
+- Scan ports using Dmitry. Document the screenshot
 
 ```shell
-bashCopy code
-hping3 -S 192.168.1.1 -p 80
+dmitry -p wiut.uz
 ```
 
-## Netcat
-
-Explanation: Netcat is a versatile networking tool used for reading from and writing to network connections using TCP or UDP.
-Example: Create a simple TCP connection to port 80 of a website.
+- Get all possible information about any domain using the following command of dmitry
 
 ```shell
-bashCopy code
-nc www.example.com 80
+dmitry -winsepo wiut.uz
 ```
 
-## DMitry (Deepmagic Information Gathering Tool)
+## theHarvester tool
 
-Explanation: DMitry is capable of gathering data about a target, such as subdomains, email addresses, uptime info, and more.
-Example: Gather email addresses for a domain.
+The objective of the Harvester is to gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
+
+- Gather information from a domain (-d tesla.com), limiting the results to 500 (-l 500), using all searching databases . Document your results
 
 ```shell
-bashCopy code
-dmitry -e example.com
+theHarvester -d wiut.uz -l 500 -b all
 ```
 
-## Tcpdump
+## tcpdump
 
-Explanation: Tcpdump is a powerful command-line packet analyzer for Unix-like operating systems; it's used for network debugging and traffic monitoring.
-Example: Capture packets on the eth0 interface.
+Captures and displays packet header information passing over a network interface.
+
+- Capture Packets from Specific Interface eth0 using tcpdump
 
 ```shell
-bashCopy code
 tcpdump -i eth0
 ```
 
-## arp-scan
-
-Explanation: arp-scan sends ARP packets to hosts on the local network and displays any responses, useful for discovering physical devices on a network.
-Example: Scan your local network for devices.
+- Capture only 5 packets from eth0 interface using tcpdump
 
 ```shell
-bashCopy code
-sudo arp-scan --localnet
+tcpdump -i eth0 -n -c 5
+```
+
+- splay available interfaces on the system using tcpdump
+
+```shell
+tcpdump -D
+```
+
+- Capture packets from source IP (win7 machine) on eth0 interface using tcpdum
+
+```shell
+tcpdump -i eth0 src
 ```
 
 ## Netdiscover
 
-Explanation: Netdiscover is an active/passive ARP reconnaissance tool, used for scanning networks to discover hosts.
-Example: Passively scan for network hosts.
+Active/passive ARP reconnaissance tool.
 
 ```shell
-bashCopy code
-netdiscover -p
+netdiscover -i <interface>
+```
+
+## Arp-scan
+
+Enumerates IP addresses by MAC addresses on a local area network.
+
+```shell
+Arp-scan --localnet
+```
+
+## nmap
+
+version and services on ips, open ports, XMAS tree scan, OS
+
+- pingthe entire network using nmap
+
+```shell
+nmap -sP ip
+```
+
+- Service version detection on a target IP address. Identify the version numbers of the running services.
+
+```shell
+nmap -sV ip
+```
+
+- TCP SYN scan on a target IP address within the network using Nmap. Identify the open ports and their associated services.
+
+```shell
+nmap -sS ip
+```
+
+- Check for specific ports on the NETWORK
+
+```shell
+nmap -sT -p 80,100 ip
+```
+
+- Scan a range of 80-100 ports
+
+```shell
+nmap -p 80-100 ip
+```
+
+- Scan 20 top ports using nmap
+
+```shell
+nmap --top-ports 20 ip
+```
+
+- Perform a UDP scan on port 80
+
+```shell
+nmap -sU -p 80 ip
+```
+
+- Perform XMAS tree scan on two different IP address in the network, the command should only show ‘open’ ports, run as fast scan, and saves the outcome to an XML file called ‘output.xml’
+
+```shell
+nmap -sX --open -T4 -oX ip ip
+```
+
+- Scan the target to find out Operating System (OS) in use
+
+```shell
+nmap -O ip
+```
+
+## Nikto
+
+Web vulnerabilities
+
+- Use Nikto to perform a web application scan on the URL https://www.wiut.uz to dentify any potential security issues or misconfigurations on the web server.
+
+```shell
+nikto -url www.wiut.uz
+```
+
+- Scan with –ssl flag
+
+```shell
+nikto -url www.wiut.uz -ssl
+```
+
+- Scan the target URL and perform a database check to ensure it's using the latest vulnerability checks and plugin signatures.
+
+```shell
+nikto www.wiut.uz -dbcheck
 ```
 
 ## Wapiti
 
-Explanation: Wapiti allows you to audit the security of your web applications. It performs "black-box" scans, i.e., it does not study the source code but scans the webpages of the deployed web app.
-Example: Scan a website for vulnerabilities.
+security vulnerabilities
+Wapiti scan on the target web application http://example.com to identify potential security vulnerabilities, such as SQL injection, cross-site scripting (XSS), and directory traversal.
 
 ```shell
-bashCopy code
-wapiti -u http://www.example.com
+wapiti -v2 -u http://testphp.vulnweb.com
 ```
 
-## theHarvester
+## Netcat
 
-Explanation: theHarvester is used to gather open-source intelligence (OSINT), particularly around domain emails, subdomains, hosts, employee names, and more.
-Example: Gather emails related to a domain.
-
-```shell
-bashCopy code
-theharvester -d example.com -b all
-```
-
-## dig (Domain Information Groper)
-
-Explanation: dig is a tool for querying DNS name servers for information about host addresses, mail exchanges, name servers, and related information.
-Example: Query A records for a domain.
+Facilitates port scanning, transferring files, port listening, and banner grabbing.
 
 ```shell
-bashCopy code
-dig example.com A
-```
-
-## whois
-
-Explanation: whois is a protocol and utility used to query databases that store the registered users or assignees of an Internet resource, such as a domain name.
-Example: Perform a whois lookup for a domain.
-
-```shell
-bashCopy code
-whois example.com
+nc -vv ip 1-99
 ```
