@@ -1,3 +1,5 @@
+import { prismaClient } from '@/lib/prisma.client';
+
 export const getUserLikeCount = async ({
   sessionId,
   slug,
