@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,28 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ContentMeta {
-  id        Int      @id @default(autoincrement())
+model PostMetrics {
+  id        String   @id @default(cuid())
   slug      String   @unique
+  likes     Int      @default(0)
+  views     Int      @default(0)
   createdAt DateTime @default(now())
-  likes     Like[]
-  views     View[]
-}
-
-model Like {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  sessionId String
-
-  contentMetaId Int?
-  ContentMeta   ContentMeta? @relation(fields: [contentMetaId], references: [id], onDelete: Cascade)
-}
-
-model View {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  sessionId String
-
-  contentMetaId Int?
-  ContentMeta   ContentMeta? @relation(fields: [contentMetaId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @updatedAt
 }
