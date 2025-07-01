@@ -6,6 +6,8 @@ Welcome to my personal website, where I share my thoughts, experiences, and proj
 
 This site is crafted using Next.js, TypeScript, Tailwind CSS, MDX Bundler, Prisma, and SWR. It serves as a digital canvas for expressing my ideas, showcasing my projects, and connecting with a wider audience.
 
+Outside of this site, I work as a **Media Manager** at [CSMarketCap](https://csmarketcap.com), a CS2 skins analytics and comparison platform.
+
 ## Acknowledgements 🤝
 
 Special thanks to [Theodorus Clarence](https://github.com/theodorusclarence) for providing the source code of their own website. This project is inspired by and built upon their work. You can find the original source code at [theodorusclarence/theodorusclarence.com](https://github.com/theodorusclarence/theodorusclarence.com).
